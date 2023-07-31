@@ -10,5 +10,9 @@ export const Menu = () => {
     return <Navigate to="/" />;
   }
 
-  return <div>Menu page</div>;
+  return (
+    <div className="p-4">
+      <div className="max-w-3xl mx-auto">Menu page</div>
+    </div>
+  );
 };

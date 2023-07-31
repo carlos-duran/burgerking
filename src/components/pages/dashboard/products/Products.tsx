@@ -10,5 +10,9 @@ export const Products = () => {
     return <Navigate to="/" />;
   }
 
-  return <div>Products</div>;
+  return (
+    <div className="p-4">
+      <div className="max-w-3xl mx-auto">Products page</div>
+    </div>
+  );
 };

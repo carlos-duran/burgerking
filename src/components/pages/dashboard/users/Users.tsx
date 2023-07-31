@@ -10,5 +10,9 @@ export const Users = () => {
     return <Navigate to="/" />;
   }
 
-  return <div>Users</div>;
+  return (
+    <div className="p-4">
+      <div className="max-w-3xl mx-auto">Users page</div>
+    </div>
+  );
 };

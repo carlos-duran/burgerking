@@ -10,5 +10,9 @@ export const Orders = () => {
     return <Navigate to="/" />;
   }
 
-  return <div>Orders</div>;
+  return (
+    <div className="p-4">
+      <div className="max-w-3xl mx-auto">Orders page</div>
+    </div>
+  );
 };
