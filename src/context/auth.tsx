@@ -10,15 +10,15 @@ type TAuthState = {
 
 const AuthContext = createContext({} as TAuthState);
 
-export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  // const initialToken = localStorage.getItem("auth-token") ?? "";
-  // const initialUserStr = localStorage.getItem("auth-user");
-  // const initialUser = initialUserStr
-  //   ? (JSON.parse(initialUserStr) as TUser)
-  //   : undefined;
+const initialToken = localStorage.getItem("auth-token") ?? "";
+const initialUserStr = localStorage.getItem("auth-user");
+const initialUser = initialUserStr
+  ? (JSON.parse(initialUserStr) as TUser)
+  : undefined;
 
-  const [token, setToken] = useState("");
-  const [user, setUser] = useState<TUser | undefined>(undefined);
+export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [token, setToken] = useState(initialToken);
+  const [user, setUser] = useState<TUser | undefined>(initialUser);
 
   const loggedIn = !!token;
 
@@ -30,8 +30,8 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     });
     if (response.ok) {
       const data = await response.json();
-      // localStorage.setItem("auth-token", data.token);
-      // localStorage.setItem("auth-user", JSON.stringify(data.user));
+      localStorage.setItem("auth-token", data.accessToken);
+      localStorage.setItem("auth-user", JSON.stringify(data.user));
       setToken(data.accessToken);
       setUser(data.user);
     }
@@ -39,8 +39,8 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const logout = () => {
-    // localStorage.removeItem("auth-token");
-    // localStorage.removeItem("auth-user");
+    localStorage.removeItem("auth-token");
+    localStorage.removeItem("auth-user");
     setToken("");
     setUser(undefined);
   };

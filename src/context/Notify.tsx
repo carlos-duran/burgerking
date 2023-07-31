@@ -29,7 +29,7 @@ export const NotifyProvider: FC<Props> = ({ children }) => {
       <NotifyContext.Provider value={notify}>{children}</NotifyContext.Provider>
 
       {message && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-300 text-black px-4 py-2 rounded-md">
+        <div className="fixed bottom-14 left-1/2 -translate-x-1/2 bg-gray-300 text-black px-4 py-2 rounded-md">
           {message}
         </div>
       )}

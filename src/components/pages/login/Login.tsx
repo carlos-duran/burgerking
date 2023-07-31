@@ -1,10 +1,9 @@
-import { Navigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
 import { useNotify } from "../../../context/notify";
 
 export const Login = () => {
   const notify = useNotify();
-  const { loggedIn, login } = useAuth();
+  const { login } = useAuth();
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
@@ -24,8 +23,6 @@ export const Login = () => {
       notify("No se pudo establecer conexión con el servidor");
     }
   };
-
-  if (loggedIn) return <Navigate to="/" />;
 
   return (
     <div className="flex flex-col min-h-screen justify-center items-center">
