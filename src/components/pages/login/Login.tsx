@@ -1,56 +1,64 @@
-import { useNotify } from "../../../context/Notify";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../../context/auth";
+import { useNotify } from "../../../context/notify";
 
 export const Login = () => {
   const notify = useNotify();
+  const { loggedIn, login } = useAuth();
 
   const onSubmit: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target as HTMLFormElement);
-
-    const payload = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     try {
-      const response = await fetch("/login", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      if (response.ok) {
-        notify("Bienvenido!");
+      const success = await login(email, password);
+      if (success) {
+        notify("Bienvenidx!");
       } else {
-        // correo o contraseña inválidos
+        notify("Correo o contraseña inválidos");
       }
     } catch (error) {
-      // no se pudo establecer conexión con el servidor
+      notify("No se pudo establecer conexión con el servidor");
     }
   };
 
+  if (loggedIn) return <Navigate to="/" />;
+
   return (
-    <div>
-      <h1>Login</h1>
-      <button onClick={() => notify("Hola mundo cruel!")}>Notify</button>
-      <button onClick={() => notify("Hola mundo sad!")}>Notify 2</button>
-      <button onClick={() => notify("Hola mundo mal!")}>Notify 3</button>
-      <button onClick={() => notify("Hola mundito!")}>Notify 4</button>
+    <div className="flex flex-col min-h-screen justify-center items-center">
+      <div>
+        <h1 className="text-3xl mb-4 text-center">Login</h1>
 
-      <form onSubmit={onSubmit}>
-        <label className="block">
-          <span>Correo</span>
-          <input type="email" name="email" />
-        </label>
+        <form
+          onSubmit={onSubmit}
+          className="border border-white rounded p-4 max-w-md w-full"
+        >
+          <label className="block mb-4">
+            <span className="block">Correo</span>
+            <input
+              type="email"
+              name="email"
+              className="px-4 py-2 bg-transparent border border-white rounded"
+            />
+          </label>
 
-        <label className="block">
-          <span>Contraseña</span>
-          <input type="password" name="password" />
-        </label>
+          <label className="block mb-4">
+            <span className="block">Contraseña</span>
+            <input
+              type="password"
+              name="password"
+              className="px-4 py-2 bg-transparent border border-white rounded"
+            />
+          </label>
 
-        <button>Iniciar sesión</button>
-      </form>
+          <button className="bg-orange-900 px-4 py-2 w-full rounded">
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
