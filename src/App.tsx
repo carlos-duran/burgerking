@@ -14,7 +14,7 @@ import { FirstAuthorized } from "./components/pages/dashboard/FirstAuthorized";
 
 function App() {
   return (
-    <div className="bg-black text-white min-h-screen  ">
+    <div className="bg-black text-white">
       <NotifyProvider>
         <AuthProvider>
           <BrowserRouter>
