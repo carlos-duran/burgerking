@@ -1,5 +1,6 @@
 import { FC, ReactNode, createContext, useContext, useState } from "react";
 import { TUser } from "../types/user";
+import { API_URL } from "../constants/api";
 
 type TAuthState = {
   loggedIn: boolean;
@@ -23,7 +24,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const loggedIn = !!token;
 
   const login = async (email: string, password: string) => {
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch(API_URL + "/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

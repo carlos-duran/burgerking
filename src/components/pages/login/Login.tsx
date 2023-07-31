@@ -25,20 +25,18 @@ export const Login = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen justify-center items-center">
-      <div>
+    <div className="flex flex-col min-h-screen justify-center items-center p-4">
+      <div className="max-w-md w-full">
         <h1 className="text-3xl mb-4 text-center">Login</h1>
 
-        <form
-          onSubmit={onSubmit}
-          className="border border-white rounded p-4 max-w-md w-full"
-        >
+        <form onSubmit={onSubmit} className="border border-white rounded p-4">
           <label className="block mb-4">
             <span className="block">Correo</span>
             <input
               type="email"
               name="email"
-              className="px-4 py-2 bg-transparent border border-white rounded"
+              className="px-4 py-2 bg-transparent border border-white rounded w-full"
+              required
             />
           </label>
 
@@ -47,11 +45,12 @@ export const Login = () => {
             <input
               type="password"
               name="password"
-              className="px-4 py-2 bg-transparent border border-white rounded"
+              className="px-4 py-2 bg-transparent border border-white rounded w-full"
+              required
             />
           </label>
 
-          <button className="bg-orange-900 px-4 py-2 w-full rounded">
+          <button className="bg-orange-900 px-4 py-2 rounded w-full">
             Iniciar sesión
           </button>
         </form>

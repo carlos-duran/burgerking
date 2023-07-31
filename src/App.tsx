@@ -8,8 +8,9 @@ import { Users } from "./components/pages/dashboard/users/Users";
 import { NotFound } from "./components/pages/NotFound";
 import { NotifyProvider } from "./context/notify";
 import { AuthProvider } from "./context/auth";
-import { PrivateRoute } from "./components/pages/PrivateRoute";
-import { PublicRoute } from "./components/pages/PublicRoute";
+import { Authenticated } from "./components/pages/Authenticated";
+import { NotAuthenticated } from "./components/pages/NotAuthenticated";
+import { FirstAuthorized } from "./components/pages/dashboard/FirstAuthorized";
 
 function App() {
   return (
@@ -18,12 +19,13 @@ function App() {
         <AuthProvider>
           <BrowserRouter>
             <Routes>
-              <Route element={<PublicRoute />}>
-                <Route path="/login" element={<Login />} />
+              <Route element={<NotAuthenticated />}>
+                <Route path="login" element={<Login />} />
               </Route>
 
-              <Route element={<PrivateRoute />}>
-                <Route path="/" element={<Dashboard />}>
+              <Route element={<Authenticated />}>
+                <Route path="" element={<Dashboard />}>
+                  <Route path="" element={<FirstAuthorized />} />
                   <Route path="menu" element={<Menu />} />
                   <Route path="orders" element={<Orders />} />
                   <Route path="products" element={<Products />} />
